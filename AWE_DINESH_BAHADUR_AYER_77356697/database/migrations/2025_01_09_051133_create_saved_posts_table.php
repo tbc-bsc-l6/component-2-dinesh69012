@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('saved_posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('title')->unique();
+            $table->string('title')->nullable();
             $table->text('excerpt')->nullable();
-            $table->text('body');
-            $table->string('image_path');
-            $table->boolean('is_published');
+            $table->text('body')->nullable();
+            $table->string('image_path')->nullable();
+            $table->boolean('is_published')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('posts_saved');
     }
 };
